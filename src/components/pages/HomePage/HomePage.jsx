@@ -6,10 +6,7 @@ function HomePage() {
   const [movies, setMoveis] = useState([]);
 
   useEffect(() => {
-    getFilms().then(({ results }) => {
-      setMoveis(results);
-      console.log(results);
-    });
+    getFilms().then(({ results }) => setMoveis(results));
   }, []);
 
   return (
@@ -19,8 +16,8 @@ function HomePage() {
         {movies &&
           movies.length > 0 &&
           movies.map((movie) => (
-            <li>
-              <NavLink key={movie.id} to={"/movies/" + String(movie.id)}>
+            <li key={movie.id}>
+              <NavLink to={"/movies/" + String(movie.id)}>
                 {movie.original_title}
               </NavLink>
             </li>

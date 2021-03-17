@@ -14,7 +14,7 @@ export default [
   {
     path: "/movies",
     component: MoviesPage,
-    exact: false,
+    exact: true,
   },
   {
     path: "/movies/:movieId",
