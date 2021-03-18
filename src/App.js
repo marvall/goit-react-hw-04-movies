@@ -1,7 +1,7 @@
 import { Redirect, Route, Switch } from "react-router-dom";
 import NavMenu from "./components/NavMenu";
 import navigation from "./utils/navigation";
-import "./App.css";
+import "./reset.css";
 
 function App() {
   return (

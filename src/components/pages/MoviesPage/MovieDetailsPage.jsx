@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { getFilmsById } from "../../../api/tvMovieDb";
+import Style from "./MovieDetailsPfge.module.scss";
 
 function MoviesDetailsPage({
   match: {
     params: { movieId },
+    url,
   },
 }) {
   const [movie, setMovie] = useState({});
@@ -16,27 +18,48 @@ function MoviesDetailsPage({
   }, []);
   return (
     <>
-      <button>Go back</button>
-      <div>Deteils</div>
-      <img
-        src={"https://image.tmdb.org/t/p/w300" + movie?.poster_path}
-        alt={movie?.title}
-      />
-      <h3>{movie?.original_title}</h3>
-      <p>
-        <span>User Score:</span> {movie?.vote_average * 10 + "%"}
-      </p>
-      <p>
-        <span>Overview:</span> {movie?.overview}
-      </p>
-      <p>
-        <span>Genres:</span>{" "}
-        {movie?.genres ? movie.genres.map((genr) => `${genr.name}, `) : null}
-      </p>
+      <button className={Style.go_back_button}>Go back</button>
+      <div className={Style.details__page_wrapper}>
+        <img
+          src={"https://image.tmdb.org/t/p/w300" + movie?.poster_path}
+          alt={movie?.title}
+        />
+        <div className={Style.details__page_descriptions}>
+          <h3 className={Style.title}>{movie?.original_title}</h3>
+          <p>
+            <span className={Style.label__description}>User Score:</span>{" "}
+            {movie?.vote_average * 10 + "%"}
+          </p>
+          <p>
+            <span className={Style.label__description}>Overview:</span>{" "}
+            {movie?.overview}
+          </p>
+          <p>
+            <span className={Style.label__description}>Genres:</span>{" "}
+            {movie?.genres
+              ? movie.genres.map((genr) => `${genr.name}, `)
+              : null}
+          </p>
+        </div>
+      </div>
       <div>
-        <p>Additionals Information</p>
-        <NavLink to={`/cast`}>Cast</NavLink>
-        <NavLink to={"/reviews"}>Reviews</NavLink>
+        <p className={`${Style.label__description} ${Style.additional}`}>
+          Additionals Information
+        </p>
+        <NavLink
+          to={`${url}/cast`}
+          className={Style.link}
+          activeClassName={Style.link__active}
+        >
+          Cast
+        </NavLink>
+        <NavLink
+          to={`${url}/reviews`}
+          className={Style.link}
+          activeClassName={Style.link__active}
+        >
+          Reviews
+        </NavLink>
       </div>
     </>
   );
