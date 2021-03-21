@@ -10,11 +10,7 @@ function Reviews({
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    getFilmsById(movieId, "reviews").then(({ results }) => {
-      console.log(results);
-
-      setReviews(results);
-    });
+    getFilmsById(movieId, "reviews").then(({ results }) => setReviews(results));
   }, [movieId]);
   return (
     <>
@@ -24,14 +20,19 @@ function Reviews({
             ? reviews.map((review) => (
                 <li key={review?.id} className={Style.reviews__item}>
                   <div className={Style.reviews__wrapper}>
-                    <img
-                      src={
-                        "https://image.tmdb.org/t/p/w300" +
-                        review?.author_details.avatar_path
-                      }
-                      alt={review?.author}
-                      width="80px"
-                    />
+                    {review.author_details.avatar_path ? (
+                      <img
+                        src={
+                          review.author_details.avatar_path.includes("http")
+                            ? review.author_details.avatar_path.slice(1)
+                            : "https://image.tmdb.org/t/p/w300" +
+                              review?.author_details.avatar_path
+                        }
+                        alt={review?.author}
+                        width="80px"
+                      />
+                    ) : null}
+
                     <p className={Style.reviews__description}>
                       <span className={Style.reviews__lebel}>NickName:</span>{" "}
                       {review?.author}

@@ -1,9 +1,28 @@
-import HomePage from "../components/pages/HomePage/HomePage";
-import MoviesPage from "../components/pages/MoviesPage/MoviesPage";
-import MoviesDetailsPage from "../components/pages/MoviesPage/MovieDetailsPage";
-import Cast from "../components/pages/MoviesPage/Cast";
-import Reviews from "../components/pages/MoviesPage/Reviews";
+import { lazy } from "react";
 
+const HomePage = lazy(() =>
+  import(
+    "../components/pages/HomePage/HomePage" /* webpackChunkName: "home-page" */
+  )
+);
+const MoviesPage = lazy(() =>
+  import(
+    "../components/pages/MoviesPage/MoviesPage" /* webpackChunkName: "movies-page" */
+  )
+);
+const MoviesDetailsPage = lazy(() =>
+  import(
+    "../components/pages/MoviesPage/MovieDetailsPage" /* webpackChunkName: "movie-details-page" */
+  )
+);
+const Cast = lazy(() =>
+  import("../components/pages/MoviesPage/Cast" /* webpackChunkName: "cast" */)
+);
+const Reviews = lazy(() =>
+  import(
+    "../components/pages/MoviesPage/Reviews" /* webpackChunkName: "reviews" */
+  )
+);
 // eslint-disable-next-line import/no-anonymous-default-export
 export default [
   {

@@ -5,12 +5,26 @@ import { getFilmsById } from "../../../api/tvMovieDb";
 import Style from "./MovieDetailsPage.module.scss";
 
 function MoviesDetailsPage({
+  history,
+  location,
   match: {
     params: { movieId },
     url,
   },
 }) {
   const [movie, setMovie] = useState({});
+  const handleButtonClick = () => {
+    if (location.state) {
+      history.push({
+        pathname: "/movies",
+        search: location.state.searchQuery,
+        state: { movies: location.state.movies },
+      });
+    } else {
+      history.push({ pathname: "/" });
+    }
+  };
+
   useEffect(() => {
     getFilmsById(movieId).then((data) => {
       setMovie(data);
@@ -18,12 +32,16 @@ function MoviesDetailsPage({
   }, []);
   return (
     <>
-      <button className={Style.go_back_button}>Go back</button>
+      <button onClick={handleButtonClick} className={Style.go_back_button}>
+        Go back
+      </button>
       <div className={Style.details__page_wrapper}>
-        <img
-          src={"https://image.tmdb.org/t/p/w300" + movie?.poster_path}
-          alt={movie?.title}
-        />
+        {movie.poster_path ? (
+          <img
+            src={"https://image.tmdb.org/t/p/w300" + movie.poster_path}
+            alt={movie?.title}
+          />
+        ) : null}
         <div className={Style.details__page_descriptions}>
           <h3 className={Style.title}>{movie?.original_title}</h3>
           <p>
@@ -42,10 +60,10 @@ function MoviesDetailsPage({
           </p>
         </div>
       </div>
-      <div>
-        <p className={`${Style.label__description} ${Style.additional}`}>
-          Additionals Information
-        </p>
+      <p className={`${Style.label__description} ${Style.additional}`}>
+        Additionals Information
+      </p>
+      <div className={Style.nav__menu}>
         <NavLink
           to={`${url}/cast`}
           className={Style.link}

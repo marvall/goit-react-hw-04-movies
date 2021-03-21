@@ -20,11 +20,14 @@ function Cast({
           credits.length > 0 &&
           credits.map((actor) => (
             <li key={actor?.id} className={Style.cast__item}>
-              <img
-                src={"https://image.tmdb.org/t/p/w300" + actor?.profile_path}
-                alt={actor?.original_name}
-                width="100px"
-              />
+              {actor.profile_path ? (
+                <img
+                  src={"https://image.tmdb.org/t/p/w300" + actor?.profile_path}
+                  alt={actor?.original_name}
+                  width="100px"
+                />
+              ) : null}
+
               <div>
                 <p className={Style.cast__description}>
                   <span className={Style.cast__lebel}>Character:</span>{" "}

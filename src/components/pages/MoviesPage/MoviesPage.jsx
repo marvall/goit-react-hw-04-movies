@@ -2,17 +2,25 @@ import { useState } from "react";
 import { getFilms } from "../../../api/tvMovieDb";
 import { NavLink } from "react-router-dom";
 import Style from "./MoviesPage.module.scss";
+const queryString = require("query-string");
 
-function MoviesPage() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [movies, setMoveis] = useState([]);
+function MoviesPage({ history, location }) {
+  const [searchQuery, setSearchQuery] = useState(
+    queryString.parse(location.search).query
+  );
+  const [movies, setMoveis] = useState(
+    location.state ? location.state.movies : []
+  );
 
   const handleChange = (event) => {
     setSearchQuery(event.target.value);
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-
+    history.push({
+      ...location,
+      search: `?query=${searchQuery}`,
+    });
     getFilms(searchQuery).then(({ results }) => {
       setMoveis(results);
     });
@@ -41,7 +49,10 @@ function MoviesPage() {
           movies.map((movie) => (
             <li key={movie.id}>
               <NavLink
-                to={"/movies/" + String(movie.id)}
+                to={{
+                  pathname: `/movies/${String(movie.id)}`,
+                  state: { searchQuery, movies },
+                }}
                 className={Style.movie__list_item}
               >
                 {movie.original_title}
