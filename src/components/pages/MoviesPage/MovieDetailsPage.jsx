@@ -1,7 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { getFilmsById } from "../../../api/tvMovieDb";
-import Style from "./MovieDetailsPfge.module.scss";
+import Style from "./MovieDetailsPage.module.scss";
 
 function MoviesDetailsPage({
   match: {
@@ -13,7 +14,6 @@ function MoviesDetailsPage({
   useEffect(() => {
     getFilmsById(movieId).then((data) => {
       setMovie(data);
-      console.log(data);
     });
   }, []);
   return (

@@ -1,0 +1,23 @@
+.cast__list {
+  display: flex;
+  flex-wrap: wrap;
+  width: 1200px;
+}
+.cast__item {
+  display: flex;
+  width: 280px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  background: rgb(240, 240, 240);
+}
+.cast__description {
+  margin: 0;
+  padding: 10px;
+  margin-left: 10px;
+  &:not(:last-child) {
+    margin-bottom: 10px;
+  }
+}
+.cast__lebel {
+  font-weight: 700;
+}

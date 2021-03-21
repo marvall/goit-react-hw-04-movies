@@ -1,9 +1,1 @@
-.movie__list_item {
-  font-size: 18px;
-  font-weight: 500;
-  color: rgb(32, 31, 31);
-  padding: 2px;
-  &:hover {
-    color: rgb(212, 38, 90);
-  }
-}
+@import "../../../sass/MoviesList.scss";
