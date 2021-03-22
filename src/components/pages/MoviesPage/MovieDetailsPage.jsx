@@ -64,20 +64,53 @@ function MoviesDetailsPage({
         Additionals Information
       </p>
       <div className={Style.nav__menu}>
-        <NavLink
-          to={`${url}/cast`}
-          className={Style.link}
-          activeClassName={Style.link__active}
-        >
-          Cast
-        </NavLink>
-        <NavLink
-          to={`${url}/reviews`}
-          className={Style.link}
-          activeClassName={Style.link__active}
-        >
-          Reviews
-        </NavLink>
+        {location.state ? (
+          <>
+            <NavLink
+              to={{
+                pathname: `${url}/cast`,
+                state: {
+                  searchQuery: location.state.searchQuery,
+                  movies: location.state.movies,
+                },
+              }}
+              className={Style.link}
+              activeClassName={Style.link__active}
+            >
+              Cast
+            </NavLink>
+            <NavLink
+              to={{
+                pathname: `${url}/reviews`,
+                state: {
+                  searchQuery: location.state.searchQuery,
+                  movies: location.state.movies,
+                },
+              }}
+              className={Style.link}
+              activeClassName={Style.link__active}
+            >
+              Cast
+            </NavLink>
+          </>
+        ) : (
+          <>
+            <NavLink
+              to={`${url}/cast`}
+              className={Style.link}
+              activeClassName={Style.link__active}
+            >
+              Cast
+            </NavLink>
+            <NavLink
+              to={`${url}/reviews`}
+              className={Style.link}
+              activeClassName={Style.link__active}
+            >
+              Reviews
+            </NavLink>
+          </>
+        )}
       </div>
     </>
   );
