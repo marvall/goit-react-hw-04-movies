@@ -90,7 +90,7 @@ function MoviesDetailsPage({
               className={Style.link}
               activeClassName={Style.link__active}
             >
-              Cast
+              Reviews
             </NavLink>
           </>
         ) : (
