@@ -1,14 +1,11 @@
 import { useState, useEffect } from "react";
+import { useParams } from "react-router";
 import { getFilmsById } from "../../../api/tvMovieDb";
 import Style from "./Review.module.scss";
 
-function Reviews({
-  match: {
-    params: { movieId },
-  },
-}) {
+function Reviews() {
   const [reviews, setReviews] = useState([]);
-
+  const { movieId } = useParams();
   useEffect(() => {
     getFilmsById(movieId, "reviews").then(({ results }) => setReviews(results));
   }, [movieId]);

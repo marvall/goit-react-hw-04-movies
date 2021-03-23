@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { getFilms } from "../../../api/tvMovieDb";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory, useLocation } from "react-router-dom";
 import Style from "./MoviesPage.module.scss";
 const queryString = require("query-string");
 
-function MoviesPage({ history, location }) {
+function MoviesPage() {
+  const history = useHistory();
+  const location = useLocation();
   const [searchQuery, setSearchQuery] = useState(
-    queryString.parse(location.search).query
+    location.search ? queryString.parse(location.search).query : ""
   );
   const [movies, setMoveis] = useState(
     location.state ? location.state.movies : []

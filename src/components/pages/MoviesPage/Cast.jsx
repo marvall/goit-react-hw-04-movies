@@ -1,14 +1,11 @@
 import { useState, useEffect } from "react";
+import { useParams } from "react-router";
 import { getFilmsById } from "../../../api/tvMovieDb";
 import Style from "./Cast.module.scss";
 
-function Cast({
-  match: {
-    params: { movieId },
-  },
-}) {
+function Cast() {
   const [credits, setCredits] = useState([]);
-
+  const { movieId } = useParams();
   useEffect(() => {
     getFilmsById(movieId, "cast").then(({ cast }) => setCredits(cast));
   }, [movieId]);
