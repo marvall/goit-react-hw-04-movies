@@ -1,7 +1,7 @@
-import { Redirect, Route } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import { Suspense } from "react";
 import NavMenu from "./components/NavMenu";
-import navigation from "./utils/navigation";
+import { navApp } from "./utils/navigation";
 import "./sass/reset.scss";
 
 function App() {
@@ -9,11 +9,13 @@ function App() {
     <>
       <NavMenu />
       <Suspense fallback={<div>Loading...</div>}>
-        {navigation.map(({ path, component, exact }) => (
-          <Route key={path} path={path} exact={exact} component={component} />
-        ))}
+        <Switch>
+          {navApp.map(({ path, component, exact }) => (
+            <Route key={path} path={path} exact={exact} component={component} />
+          ))}
+        </Switch>
+        <Redirect to="/" />
       </Suspense>
-      <Redirect to="/" />
     </>
   );
 }

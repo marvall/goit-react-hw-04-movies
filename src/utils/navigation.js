@@ -24,15 +24,10 @@ const Reviews = lazy(() =>
   )
 );
 // eslint-disable-next-line import/no-anonymous-default-export
-export default [
+export const navApp = [
   {
     path: "/",
     component: HomePage,
-    exact: true,
-  },
-  {
-    path: "/movies",
-    component: MoviesPage,
     exact: true,
   },
   {
@@ -40,6 +35,14 @@ export default [
     component: MoviesDetailsPage,
     exact: false,
   },
+  {
+    path: "/movies",
+    component: MoviesPage,
+    exact: true,
+  },
+];
+
+export const navDetails = [
   {
     path: "/movies/:movieId/cast",
     component: Cast,

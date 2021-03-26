@@ -1,11 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import {
   NavLink,
   useHistory,
   useLocation,
   useRouteMatch,
+  Switch,
+  Route,
 } from "react-router-dom";
+import { navDetails } from "../../../utils/navigation";
 import { getFilmsById } from "../../../api/tvMovieDb";
 import Style from "./MovieDetailsPage.module.scss";
 
@@ -86,6 +89,18 @@ function MoviesDetailsPage() {
           >
             Reviews
           </NavLink>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Switch>
+              {navDetails.map(({ path, component, exact }) => (
+                <Route
+                  key={path}
+                  path={path}
+                  exact={exact}
+                  component={component}
+                />
+              ))}
+            </Switch>
+          </Suspense>
         </>
       </div>
     </>
